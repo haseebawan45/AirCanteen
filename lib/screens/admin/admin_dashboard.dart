@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -395,7 +397,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Order #${order.id.substring(order.id.length - 6)}'),
+                Text('Order #${order.id.length > 6 ? order.id.substring(order.id.length - 6) : order.id}'),
                 const SizedBox(height: 16),
                 const Text('Current Status:'),
                 Container(

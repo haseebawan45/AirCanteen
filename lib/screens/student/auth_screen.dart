@@ -56,6 +56,9 @@ class _AuthScreenState extends State<AuthScreen> {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
       bool success;
       
+      // Make sure previous user is logged out
+      await userProvider.logout();
+      
       if (_isLogin) {
         success = await userProvider.login(
           _emailController.text.trim(),
@@ -70,8 +73,15 @@ class _AuthScreenState extends State<AuthScreen> {
       }
       
       if (success && mounted) {
-        // Navigate to home screen
-        context.go('/home');
+        // Check if admin login was attempted through student login screen
+        final user = userProvider.currentUser;
+        if (user != null && user.isAdmin) {
+          // Navigate to admin dashboard
+          context.go('/admin/dashboard');
+        } else {
+          // Navigate to home screen for students
+          context.go('/home');
+        }
       }
     } catch (error) {
       // Show error message

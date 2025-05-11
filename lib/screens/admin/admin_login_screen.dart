@@ -53,6 +53,10 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
     
     try {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
+      
+      // Make sure we start from a clean state
+      await userProvider.logout();
+      
       final success = await userProvider.login(
         _emailController.text.trim(),
         _passwordController.text,

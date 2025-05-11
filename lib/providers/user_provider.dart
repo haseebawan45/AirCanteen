@@ -54,12 +54,17 @@ class UserProvider extends ChangeNotifier {
 
   Future<bool> login(String email, String password) async {
     try {
+      // Clear any existing user first
+      _currentUser = null;
+      
       // In a real app, this would be an API call
       // For demo, we'll check if the user is admin or student
       if (email.toLowerCase().contains('admin')) {
         _currentUser = MockData.getAdminUser();
+        print('Created admin user with isAdmin: ${_currentUser!.isAdmin}');
       } else {
         _currentUser = MockData.getCurrentUser();
+        print('Created student user with isAdmin: ${_currentUser!.isAdmin}');
       }
       
       // Save to prefs

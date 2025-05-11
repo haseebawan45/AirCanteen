@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:go_router/go_router.dart';
@@ -52,7 +54,7 @@ class OrderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Order #${order.id.substring(order.id.length - 6)}',
+                      'Order #${order.id.length > 6 ? order.id.substring(order.id.length - 6) : order.id}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
