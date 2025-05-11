@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _navigateToFoodDetail(FoodItem foodItem) {
-    context.push('/search/food-detail/${foodItem.id}', extra: foodItem);
+    context.push('/search/food/${foodItem.id}', extra: foodItem);
   }
 
   void _addToCart(FoodItem foodItem) {

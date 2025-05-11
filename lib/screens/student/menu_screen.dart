@@ -43,7 +43,7 @@ class _MenuScreenState extends State<MenuScreen> with SingleTickerProviderStateM
   }
 
   void _navigateToFoodDetail(FoodItem foodItem) {
-    context.push('/menu/food-detail/${foodItem.id}', extra: foodItem);
+    context.push('/menu/food/${foodItem.id}', extra: foodItem);
   }
 
   void _addToCart(FoodItem foodItem) {

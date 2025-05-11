@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _navigateToFoodDetail(FoodItem foodItem) {
-    context.push('/home/food-detail/${foodItem.id}', extra: foodItem);
+    context.push('/home/food/${foodItem.id}', extra: foodItem);
   }
 
   void _addToCart(FoodItem foodItem) {

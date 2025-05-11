@@ -36,14 +36,14 @@ class FoodItemCard extends StatelessWidget {
         // Based on the current route, determine which path to use
         final currentRoute = GoRouterState.of(context).uri.path;
         if (currentRoute.startsWith('/home')) {
-          context.push('/home/food-detail/${foodItem.id}', extra: modifiedFoodItem);
+          context.push('/home/food/${foodItem.id}', extra: modifiedFoodItem);
         } else if (currentRoute.startsWith('/menu')) {
-          context.push('/menu/food-detail/${foodItem.id}', extra: modifiedFoodItem);
+          context.push('/menu/food/${foodItem.id}', extra: modifiedFoodItem);
         } else if (currentRoute.startsWith('/search')) {
-          context.push('/search/food-detail/${foodItem.id}', extra: modifiedFoodItem);
+          context.push('/search/food/${foodItem.id}', extra: modifiedFoodItem);
         } else {
           // Default fallback
-          context.push('/home/food-detail/${foodItem.id}', extra: modifiedFoodItem);
+          context.push('/home/food/${foodItem.id}', extra: modifiedFoodItem);
         }
       },
       child: Container(
