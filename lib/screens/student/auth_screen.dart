@@ -43,6 +43,16 @@ class _AuthScreenState extends State<AuthScreen> {
     });
   }
 
+  void _useAdminCredentials() {
+    _emailController.text = 'admin@aircanteen.com';
+    _passwordController.text = 'admin123';
+  }
+
+  void _useStudentCredentials() {
+    _emailController.text = 'alex.johnson@example.com';
+    _passwordController.text = 'student123';
+  }
+
   Future<void> _submitForm() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -271,21 +281,32 @@ class _AuthScreenState extends State<AuthScreen> {
                       
                       const SizedBox(height: 16),
                       
-                      // Admin login shortcut (for demo purposes)
-                      TextButton(
-                        onPressed: () {
-                          _emailController.text = 'admin@aircanteen.com';
-                          _passwordController.text = 'admin123';
-                        },
-                        child: Text(
-                          'Admin Login (Demo)',
-                          style: TextStyle(
-                            color: Colors.grey.shade600,
+                      // Demo credentials
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton(
+                            onPressed: _useAdminCredentials,
+                            child: Text(
+                              'Admin Login (Demo)',
+                              style: TextStyle(
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
                           ),
-                        ),
+                          TextButton(
+                            onPressed: _useStudentCredentials,
+                            child: Text(
+                              'Student Login (Demo)',
+                              style: TextStyle(
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
                       
                       // Toggle between login and signup
                       Row(

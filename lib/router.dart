@@ -59,7 +59,6 @@ class AppRouter {
       final isGoingToOnboarding = state.uri.path == '/onboarding';
       final isGoingToSplash = state.uri.path == '/';
       final isGoingToAdmin = state.uri.path.startsWith('/admin/');
-      final isGoingToAdminLogin = state.uri.path == '/admin/login';
       
       // Going to splash screen is always allowed
       if (isGoingToSplash) return null;
@@ -71,34 +70,25 @@ class AppRouter {
 
       // For authenticated users
       if (isLoggedIn) {
-        // If going to auth or onboarding, redirect to home
+        // If going to auth or onboarding, redirect to appropriate screen
         if (isGoingToLogin || isGoingToOnboarding) {
-          return '/home';
+          return isAdmin ? '/admin/dashboard' : '/home';
         }
       } else {
         // For non-authenticated users who have completed onboarding
-        if (isOnboardingCompleted && !isGoingToLogin && !isGoingToAdminLogin) {
+        if (isOnboardingCompleted && !isGoingToLogin) {
           return '/auth';
         }
       }
       
       // Handle admin access
-      if (isGoingToAdmin) {
-        if (!isLoggedIn && !isGoingToAdminLogin) {
-          return '/admin/login';
-        }
-        
-        if (isLoggedIn) {
-          if (!isAdmin && !isGoingToAdminLogin) {
-            // If regular user tries to access admin section, redirect to home
-            return '/home';
-          }
-          
-          if (isAdmin && isGoingToAdminLogin) {
-            // If admin tries to access login, redirect to dashboard
-            return '/admin/dashboard';
-          }
-        }
+      if (isGoingToAdmin && !isLoggedIn) {
+        return '/auth';
+      }
+      
+      // Prevent non-admin users from accessing admin routes
+      if (isGoingToAdmin && isLoggedIn && !isAdmin) {
+        return '/home';
       }
       
       return null;
@@ -116,12 +106,6 @@ class AppRouter {
       GoRoute(
         path: '/auth',
         builder: (context, state) => const AuthScreen(),
-      ),
-      
-      // Admin login
-      GoRoute(
-        path: '/admin/login',
-        builder: (context, state) => const AdminLoginScreen(),
       ),
       
       // Main student app shell
